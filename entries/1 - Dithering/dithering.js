@@ -2,4 +2,4 @@ function dither(bitmap) {
     console.log(bitmap)
 }
 
-readSourceImage(dither)
+window.onload = () => readSourceImage(dither)

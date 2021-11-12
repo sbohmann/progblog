@@ -2,7 +2,15 @@ function readSourceImage(handler) {
     let rawImage = new Image()
     rawImage.src = 'sourceImage.jpg'
     rawImage.addEventListener('load', () => {
-        createImageBitmap(rawImage)
-            .then(handler)
+        let canvas = document.createElement('canvas');
+        canvas.width = rawImage.width;
+        canvas.height = rawImage.height;
+        let context = canvas.getContext('2d')
+        context.drawImage(rawImage, 0, 0, rawImage.width, rawImage.height);
+        handler({
+            width: rawImage.width,
+            height: rawImage.height,
+            data: context.getImageData(0, 0, rawImage.width, rawImage.height).data
+        })
     })
 }
