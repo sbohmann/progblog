@@ -26,8 +26,7 @@ function dither(source) {
         target.data[offset + 3] = 255
     }
 
-    function ditheredValue(value, randomValue) {
-        let numberOfDifferentValues = 12
+    function ditheredValue(value, numberOfDifferentValues, randomValue) {
         let lower = Math.floor(value * numberOfDifferentValues / 0xff) * 0xff / numberOfDifferentValues
         let upper = Math.ceil(value * numberOfDifferentValues / 0xff) * 0xff / numberOfDifferentValues
         let sentinel = lower + randomValue * (upper - lower)
@@ -41,9 +40,9 @@ function dither(source) {
     function ditheredPixel(pixel) {
         let randomValue = Math.random()
         return {
-            r: ditheredValue(pixel.r, randomValue),
-            g: ditheredValue(pixel.g, randomValue),
-            b: ditheredValue(pixel.b, randomValue)
+            r: ditheredValue(pixel.r, 16, randomValue),
+            g: ditheredValue(pixel.g, 16, randomValue),
+            b: ditheredValue(pixel.b, 16, randomValue)
         }
     }
 
