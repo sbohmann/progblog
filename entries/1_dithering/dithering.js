@@ -27,20 +27,19 @@ function dither(source) {
     }
 
     function ditheredValue(value, randomValue) {
-        let numberOfDifferentValues = 2
-        let steps = numberOfDifferentValues - 1
-        let valueStep = 0xff / (steps)
-        for (let index = 0; index < steps; ++index) {
-            if (randomValue < value * (index + 1) / numberOfDifferentValues) {
-                let factor = steps - index
-                return valueStep * factor
-            }
+        let numberOfDifferentValues = 12
+        let lower = Math.floor(value * numberOfDifferentValues / 0xff) * 0xff / numberOfDifferentValues
+        let upper = Math.ceil(value * numberOfDifferentValues / 0xff) * 0xff / numberOfDifferentValues
+        let sentinel = lower + randomValue * (upper - lower)
+        if (sentinel < value) {
+            return upper
+        } else {
+            return lower
         }
-        return 0x00
     }
 
     function ditheredPixel(pixel) {
-        let randomValue = Math.random() * 0xff
+        let randomValue = Math.random()
         return {
             r: ditheredValue(pixel.r, randomValue),
             g: ditheredValue(pixel.g, randomValue),
