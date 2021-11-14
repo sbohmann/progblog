@@ -6,7 +6,7 @@ function dither(source, colorDepth) {
         return (y * w + x) * 4
     }
 
-    function get(x, y) {
+    function getPixel(x, y) {
         let offset = pixelOffset(x, y)
         return {
             r: source.data[offset],
@@ -15,7 +15,7 @@ function dither(source, colorDepth) {
         }
     }
 
-    function put(x, y, pixel) {
+    function putPixel(x, y, pixel) {
         let offset = pixelOffset(x, y)
         target.data[offset] = pixel.r
         target.data[offset + 1] = pixel.g
@@ -45,8 +45,8 @@ function dither(source, colorDepth) {
 
     for (let y = 0; y < h; ++y) {
         for (let x = 0; x < w; ++x) {
-            let pixel = ditheredPixel(get(x, y))
-            put(x, y, pixel)
+            let pixel = ditheredPixel(getPixel(x, y))
+            putPixel(x, y, pixel)
         }
     }
 
