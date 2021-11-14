@@ -1,4 +1,4 @@
-function dither(source) {
+function dither(source, colorDepth) {
     const [w, h] = [source.width, source.height]
     let target = new ImageData(w, h)
 
@@ -23,9 +23,9 @@ function dither(source) {
         target.data[offset + 3] = 255
     }
 
-    function ditheredValue(value, numberOfDifferentValues, randomValue) {
-        let lower = Math.floor(value * numberOfDifferentValues / 0xff) * 0xff / numberOfDifferentValues
-        let upper = Math.ceil(value * numberOfDifferentValues / 0xff) * 0xff / numberOfDifferentValues
+    function ditheredValue(value, colorDepth, randomValue) {
+        let lower = Math.floor(value * colorDepth / 0xff) * 0xff / colorDepth
+        let upper = Math.ceil(value * colorDepth / 0xff) * 0xff / colorDepth
         let sentinel = lower + randomValue * (upper - lower)
         if (sentinel < value) {
             return upper
@@ -37,9 +37,9 @@ function dither(source) {
     function ditheredPixel(pixel) {
         let randomValue = Math.random()
         return {
-            r: ditheredValue(pixel.r, 16, randomValue),
-            g: ditheredValue(pixel.g, 16, randomValue),
-            b: ditheredValue(pixel.b, 16, randomValue)
+            r: ditheredValue(pixel.r, colorDepth.red, randomValue),
+            g: ditheredValue(pixel.g, colorDepth.green, randomValue),
+            b: ditheredValue(pixel.b, colorDepth.blue, randomValue)
         }
     }
 
