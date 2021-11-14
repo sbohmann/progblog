@@ -7,10 +7,6 @@ function readSourceImage(handler) {
         canvas.height = rawImage.height;
         let context = canvas.getContext('2d')
         context.drawImage(rawImage, 0, 0, rawImage.width, rawImage.height);
-        handler({
-            width: rawImage.width,
-            height: rawImage.height,
-            data: context.getImageData(0, 0, rawImage.width, rawImage.height).data
-        })
+        handler(context.getImageData(0, 0, rawImage.width, rawImage.height))
     })
 }
