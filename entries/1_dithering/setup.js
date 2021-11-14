@@ -18,9 +18,9 @@ function setup(sourceImage) {
     }
 
     function setupColorDepthControls() {
-        for (let key in textFields) {
-                textFields[key].value = '6'
-        }
+        textFields.red.value = '6'
+        textFields.green.value = '7'
+        textFields.blue.value = '6'
         document.getElementById('applyColorDepth')
             .onclick = applyColorDepth
     }
