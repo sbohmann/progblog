@@ -23,9 +23,9 @@ function dither(source, colorDepth) {
         target.data[offset + 3] = 255
     }
 
-    function ditheredValue(value, colorDepth, randomValue) {
-        let lower = Math.floor(value * colorDepth / 0xff) * 0xff / colorDepth
-        let upper = Math.ceil(value * colorDepth / 0xff) * 0xff / colorDepth
+    function ditheredValue(value, depth, randomValue) {
+        let lower = Math.floor(value * depth / 0xff) * 0xff / depth
+        let upper = Math.ceil(value * depth / 0xff) * 0xff / depth
         let sentinel = lower + randomValue * (upper - lower)
         if (sentinel < value) {
             return upper
