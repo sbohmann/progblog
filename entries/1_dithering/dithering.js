@@ -1,9 +1,6 @@
 function dither(source) {
     const [w, h] = [source.width, source.height]
     let target = new ImageData(w, h)
-    let canvas = document.getElementById('canvas')
-    canvas.width = w
-    canvas.height = h
 
     function pixelOffset(x, y) {
         return (y * w + x) * 4
@@ -53,9 +50,5 @@ function dither(source) {
         }
     }
 
-    canvas.getContext('2d').putImageData(source, 0, 0)
-
-    canvas.onclick = () => canvas.getContext('2d').putImageData(target, 0, 0)
+    return target
 }
-
-window.onload = () => readSourceImage(dither)
