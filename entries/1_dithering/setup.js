@@ -1,5 +1,5 @@
 function setup(sourceImage) {
-    let currentColorDepth = colorDepth(12, 12, 12)
+    let currentColorDepth = colorDepth(6, 7, 6)
     let canvas = document.getElementById('canvas')
     let context = canvas.getContext('2d')
     let textFields = {
@@ -18,9 +18,9 @@ function setup(sourceImage) {
     }
 
     function setupColorDepthControls() {
-        textFields.red.value = '6'
-        textFields.green.value = '7'
-        textFields.blue.value = '6'
+        for (let key in textFields) {
+            textFields[key].value = currentColorDepth[key]
+        }
         document.getElementById('applyColorDepth')
             .onclick = applyColorDepth
     }
@@ -69,7 +69,7 @@ function setup(sourceImage) {
 
     canvas.width = sourceImage.width
     canvas.height = sourceImage.height
-    context.putImageData(sourceImage, 0, 0)
+    showDitheredImage()
     setupControls()
 }
 
