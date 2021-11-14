@@ -13,19 +13,25 @@ function setup(sourceImage) {
         setupOriginalImageButton()
     }
 
-    function showDitheredImage() {
-        context.putImageData(dither(sourceImage, currentColorDepth), 0, 0)
+    function showDitheredImage(dithering) {
+        if (dithering) {
+            context.putImageData(dither(sourceImage, currentColorDepth), 0, 0)
+        } else {
+            context.putImageData(quantize(sourceImage, currentColorDepth), 0, 0)
+        }
     }
 
     function setupColorDepthControls() {
         for (let key in textFields) {
             textFields[key].value = currentColorDepth[key]
         }
-        document.getElementById('applyColorDepth')
-            .onclick = applyColorDepth
+        document.getElementById('showDitheredImage')
+            .onclick = () => applyColorDepth(true)
+        document.getElementById('showQuantizedImage')
+            .onclick = () => applyColorDepth(false)
     }
 
-    function applyColorDepth() {
+    function applyColorDepth(dithering) {
         let newColorDepth = {}
         let inputIsApplicable = true
         for (let key in textFields) {
@@ -40,7 +46,7 @@ function setup(sourceImage) {
         }
         if (inputIsApplicable) {
             currentColorDepth = newColorDepth
-            showDitheredImage()
+            showDitheredImage(dithering)
         }
     }
 
@@ -69,7 +75,7 @@ function setup(sourceImage) {
 
     canvas.width = sourceImage.width
     canvas.height = sourceImage.height
-    showDitheredImage()
+    showDitheredImage(true)
     setupControls()
 }
 
