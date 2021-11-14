@@ -18,7 +18,10 @@ function setup(sourceImage) {
     }
 
     function setupColorDepthControls() {
-        document.getElementById('applyColorDapth')
+        for (let key in textFields) {
+                textFields[key].value = '6'
+        }
+        document.getElementById('applyColorDepth')
             .onclick = applyColorDepth
     }
 
@@ -29,8 +32,10 @@ function setup(sourceImage) {
             let value = readColorDepthValue(textFields[key])
             if (value === undefined) {
                 inputIsApplicable = false
+                textFields[key].classList.add('invalid')
             } else {
                 newColorDepth[key] = value
+                textFields[key].classList.remove('invalid')
             }
         }
         if (inputIsApplicable) {
