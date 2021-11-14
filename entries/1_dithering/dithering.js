@@ -5,12 +5,12 @@ function dither(source) {
     canvas.width = w
     canvas.height = h
 
-    function pixelOffset(y, x) {
+    function pixelOffset(x, y) {
         return (y * w + x) * 4
     }
 
     function get(x, y) {
-        let offset = pixelOffset(y, x)
+        let offset = pixelOffset(x, y)
         return {
             r: source.data[offset],
             g: source.data[offset + 1],
@@ -19,7 +19,7 @@ function dither(source) {
     }
 
     function put(x, y, pixel) {
-        let offset = pixelOffset(y, x)
+        let offset = pixelOffset(x, y)
         target.data[offset] = pixel.r
         target.data[offset + 1] = pixel.g
         target.data[offset + 2] = pixel.b
