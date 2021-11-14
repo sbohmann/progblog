@@ -1,5 +1,5 @@
-function quantize(source, colorDepth) {
-    const [w, h] = [source.width, source.height]
+function quantize(sourceImage, colorDepth) {
+    const [w, h] = [sourceImage.width, sourceImage.height]
     let target = new ImageData(w, h)
 
     function pixelOffset(x, y) {
@@ -9,9 +9,9 @@ function quantize(source, colorDepth) {
     function getPixel(x, y) {
         let offset = pixelOffset(x, y)
         return {
-            r: source.data[offset],
-            g: source.data[offset + 1],
-            b: source.data[offset + 2]
+            r: sourceImage.data[offset],
+            g: sourceImage.data[offset + 1],
+            b: sourceImage.data[offset + 2]
         }
     }
 
