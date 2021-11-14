@@ -65,7 +65,6 @@ function setup(sourceImage) {
     canvas.width = sourceImage.width
     canvas.height = sourceImage.height
     context.putImageData(sourceImage, 0, 0)
-    canvas.onclick = showDitheredImage
     setupControls()
 }
 
