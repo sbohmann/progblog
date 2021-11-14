@@ -1,6 +1,6 @@
 function dither(sourceImage, colorDepth) {
     const [w, h] = [sourceImage.width, sourceImage.height]
-    let target = new ImageData(w, h)
+    let targetImage = new ImageData(w, h)
 
     function pixelOffset(x, y) {
         return (y * w + x) * 4
@@ -17,10 +17,10 @@ function dither(sourceImage, colorDepth) {
 
     function putPixel(x, y, pixel) {
         let offset = pixelOffset(x, y)
-        target.data[offset] = pixel.r
-        target.data[offset + 1] = pixel.g
-        target.data[offset + 2] = pixel.b
-        target.data[offset + 3] = 255
+        targetImage.data[offset] = pixel.r
+        targetImage.data[offset + 1] = pixel.g
+        targetImage.data[offset + 2] = pixel.b
+        targetImage.data[offset + 3] = 255
     }
 
     function ditheredValue(value, depth, randomValue) {
@@ -50,5 +50,5 @@ function dither(sourceImage, colorDepth) {
         }
     }
 
-    return target
+    return targetImage
 }
