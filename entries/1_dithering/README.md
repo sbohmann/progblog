@@ -2,7 +2,7 @@
 
 [Example](https://sbohmann.github.io/progblog/entries/1_dithering/dithering.html)
 
-Red, green, and blue color depths all mean the number of possible values, not number of bits.
+Red, green, and blue color depths mean number of possible values, not number of bits.
 
 The default values are 6, 7, 6, as this is possible to represent with one byte per pixel, as
 
